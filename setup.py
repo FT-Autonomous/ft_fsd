@@ -5,7 +5,10 @@ package_name = 'ft_fsd'
 setup(
     name=package_name,
     version='0.0.0',
-    packages=find_packages(),
+    packages=['ft_fsd', 'fsd_path_planning/fsd_path_planning'],
+    package_dir={
+        'fsd_path_planning' : 'fsd_path_planning/fsd_path_planning'
+    },
     data_files=[
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
