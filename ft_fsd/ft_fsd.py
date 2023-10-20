@@ -42,12 +42,14 @@ def cone_array_with_covariance_to_internal_cone_format(cones):
 class Fsd(Node):
     def __init__(self):
         super().__init__("ft_fsd")
-        self.declare_parameter('use_slam', True)
+        self.declare_parameter('use_slam', False)
         if self.get_parameter('use_slam').get_parameter_value().bool_value:
             self.cone_sub = self.create_subscription(ConeArrayWithCovariance, '/map', self.cb, 1)
             self.pose_sub = self.create_subscription(PoseStamped, '/pose', self.pose_cb, 1)
+            self.frame_id = "odom"
         else:
             self.cone_sub = self.create_subscription(ConeArrayWithCovariance, '/cones', self.cb, 1)
+            self.frame_id = "base_footprint"
         self.raceline_publisher = self.create_publisher(PointArray, "/raceline", 1)
         self.waypoint_publisher = self.create_publisher(WaypointArrayStamped, "/trajectory", 1)
         # self.car_rotation = np.array([1.0, 0.0])
@@ -108,7 +110,7 @@ class Fsd(Node):
         self.raceline_publisher.publish(PointArray(points=points))
         
         msg = WaypointArrayStamped()
-        msg.header.frame_id = "base_footprint"
+        msg.header.frame_id = self.frame_id
         msg.header.stamp = inp.header.stamp
         msg.waypoints = [Waypoint(position=point) for point in points]
         self.waypoint_publisher.publish(msg)
