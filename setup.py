@@ -5,7 +5,7 @@ package_name = 'ft_fsd'
 setup(
     name=package_name,
     version='0.0.0',
-    packages=['ft_fsd', 'fsd_path_planning/fsd_path_planning'],
+    packages=['ft_fsd', 'fsd_path_planning'],
     package_dir={
         'fsd_path_planning' : 'fsd_path_planning/fsd_path_planning'
     },
