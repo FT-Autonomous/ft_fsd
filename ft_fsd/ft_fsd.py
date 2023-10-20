@@ -42,7 +42,7 @@ def cone_array_with_covariance_to_internal_cone_format(cones):
 class Fsd(Node):
     def __init__(self):
         super().__init__("ft_fsd")
-        self.declare_parameter('use_slam', False)
+        self.declare_parameter('use_slam', True)
         if self.get_parameter('use_slam').get_parameter_value().bool_value:
             self.cone_sub = self.create_subscription(ConeArrayWithCovariance, '/map', self.cb, 1)
             self.pose_sub = self.create_subscription(PoseStamped, '/pose', self.pose_cb, 1)
