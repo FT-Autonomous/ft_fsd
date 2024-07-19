@@ -16,26 +16,16 @@ from numba import jit, config
 
 def cone_array_with_covariance_to_internal_cone_format(cones):
     cone_array = [[], [], [], [], []]
-    #for cone in cones.unknown_color_cones:
-    #    cone_array[0].append([cone.point.x, cone.point.y])
-    #for cone in cones.yellow_cones:
-    #    cone_array[1].append([cone.point.x, cone.point.y])
-    #for cone in cones.blue_cones:
-    #    cone_array[2].append([cone.point.x, cone.point.y])
-    #for cone in cones.orange_cones:
-    #    cone_array[3].append([cone.point.x, cone.point.y])
-    #for cone in cones.big_orange_cones:
-    #    cone_array[4].append([cone.point.x, cone.point.y])
     for cone in cones.unknown_color_cones:
         cone_array[0].append([cone.point.x, cone.point.y])
     for cone in cones.yellow_cones:
-        cone_array[0].append([cone.point.x, cone.point.y])
+        cone_array[1].append([cone.point.x, cone.point.y])
     for cone in cones.blue_cones:
-        cone_array[0].append([cone.point.x, cone.point.y])
+        cone_array[2].append([cone.point.x, cone.point.y])
     for cone in cones.orange_cones:
-        cone_array[0].append([cone.point.x, cone.point.y])
+        cone_array[3].append([cone.point.x, cone.point.y])
     for cone in cones.big_orange_cones:
-        cone_array[0].append([cone.point.x, cone.point.y])
+        cone_array[4].append([cone.point.x, cone.point.y])
     cone_array = [np.array(cones) for cones in cone_array]
     return cone_array
 
